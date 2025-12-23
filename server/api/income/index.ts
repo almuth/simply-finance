@@ -6,14 +6,14 @@ import { eq, and, gte, lte, desc } from 'drizzle-orm';
 export default defineEventHandler(async (event) => {
   const method = event.method;
   
-  // Extract userId from context or header
-  const userId = event.context.userId || event.context.user?.id || (getHeader(event, 'x-user-id') ? Number(getHeader(event, 'x-user-id')) : 0);
+  // Extract userId from context (populated by auth middleware)
+  const userId = event.context.userId;
 
   if (!userId) {
     setResponseStatus(event, 401);
     return {
       success: false,
-      error: 'User not authenticated'
+      error: 'Unauthorized'
     };
   }
 

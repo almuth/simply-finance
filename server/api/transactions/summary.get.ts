@@ -1,20 +1,22 @@
 import { eq, and, gte, lte, sql } from 'drizzle-orm';
 import { getDb } from '~/server/db';
 import { income, expenses } from '~/server/db/schema';
+import { setResponseStatus } from 'h3';
 
 /**
  * GET /api/transactions/summary
  * Example endpoint to get transaction summary for a user
- * Query params: userId (required), startDate, endDate
+ * Query params: startDate, endDate
  */
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
-  const userId = Number(query.userId);
+  const userId = event.context.userId;
 
-  if (!userId || isNaN(userId)) {
+  if (!userId) {
+    setResponseStatus(event, 401);
     return {
       success: false,
-      error: 'Valid userId is required',
+      error: 'Unauthorized',
     };
   }
 
@@ -28,12 +30,6 @@ export default defineEventHandler(async (event) => {
     const endDate = query.endDate
       ? new Date(query.endDate as string)
       : new Date();
-
-    const dateConditions = (dateField: any) => [
-      eq(dateField, userId),
-      gte(dateField, startDate),
-      lte(dateField, endDate),
-    ];
 
     const totalIncome = await db
       .select({
@@ -82,6 +78,7 @@ export default defineEventHandler(async (event) => {
     };
   } catch (error) {
     console.error('Error fetching transaction summary:', error);
+    setResponseStatus(event, 500);
     return {
       success: false,
       error: 'Failed to fetch transaction summary',
