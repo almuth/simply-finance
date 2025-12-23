@@ -17,13 +17,17 @@
   },
   "dependencies": {
     "@nuxt/devtools": "latest",
+    "bcryptjs": "^3.0.3",
     "drizzle-orm": "^0.29.3",
+    "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.6.5",
     "nuxt": "^3.9.0",
     "vue": "^3.3.13",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.10.6",
     "drizzle-kit": "^0.20.9",
     "tsx": "^4.7.0",
