@@ -1,0 +1,64 @@
+nuxt-finance-tracker/
+│
+├── 📋 Documentation (7 files, ~74 KB)
+│   ├── README.md               # Project overview & quick start
+│   ├── PROJECT_SUMMARY.md      # Visual project summary
+│   ├── DATABASE.md             # Database schema documentation  
+│   ├── SCHEMA_DIAGRAM.md       # Entity relationship diagrams
+│   ├── SETUP.md                # Step-by-step setup guide
+│   ├── QUERY_EXAMPLES.md       # Common query patterns
+│   └── CHECKLIST.md            # Implementation checklist
+│
+├── ⚙️ Configuration (5 files)
+│   ├── package.json            # Dependencies & npm scripts
+│   ├── nuxt.config.ts          # Nuxt.js configuration
+│   ├── drizzle.config.ts       # Drizzle Kit configuration
+│   ├── tsconfig.json           # TypeScript configuration
+│   ├── .env.example            # Environment variables template
+│   └── .gitignore              # Git ignore rules
+│
+├── 🗄️ Database Layer (server/db/)
+│   ├── schema.ts              # Table definitions (201 lines)
+│   ├── queries.ts             # Query helper class (217 lines)
+│   ├── index.ts               # Database connection (50 lines)
+│   ├── migrate.ts             # Migration runner script
+│   ├── seed.ts                # Sample data seeding
+│   └── migrations/            # Generated SQL migrations
+│
+├── 🌐 API Layer (server/api/)
+│   ├── users/
+│   │   └── index.get.ts       # GET /api/users
+│   └── transactions/
+│       └── summary.get.ts     # GET /api/transactions/summary
+│
+└── 🎨 Frontend
+    ├── app.vue                 # Root Vue component
+    └── pages/
+        └── index.vue           # Landing page with info
+
+Database Schema:
+  ├── 5 Tables (users, categories, income, expenses, balances)
+  ├── 32 Fields total
+  ├── 6 Relationships with foreign keys
+  ├── 15+ Indexes for performance
+  └── DECIMAL(10,2) for all financial amounts
+
+Commands Available:
+  Development:
+    npm run dev             # Start dev server
+    npm run build           # Production build
+    npm run preview         # Preview production
+
+  Database:
+    npm run db:generate     # Generate migrations
+    npm run db:push         # Push schema to DB
+    npm run db:migrate      # Run migrations
+    npm run db:seed         # Seed sample data
+    npm run db:studio       # Open Drizzle Studio
+
+Tech Stack:
+  • Framework: Nuxt.js 3
+  • ORM: Drizzle ORM
+  • Database: MySQL 8+
+  • Language: TypeScript
+  • Node: 18+
